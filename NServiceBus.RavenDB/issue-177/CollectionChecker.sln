@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionChecker25", "Coll
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionChecker30", "CollectionChecker30\CollectionChecker30.csproj", "{576C7456-5EAD-4C71-B1CF-947F34BBC0D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NameHelpers", "NameHelpers\NameHelpers.csproj", "{6C70054C-0AE2-4735-80E2-64A44C44436E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NameHelpers.Tests", "NameHelpers.Tests\NameHelpers.Tests.csproj", "{C2650775-C818-4AC9-B631-8F4A20DACF06}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{576C7456-5EAD-4C71-B1CF-947F34BBC0D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{576C7456-5EAD-4C71-B1CF-947F34BBC0D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{576C7456-5EAD-4C71-B1CF-947F34BBC0D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C70054C-0AE2-4735-80E2-64A44C44436E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C70054C-0AE2-4735-80E2-64A44C44436E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C70054C-0AE2-4735-80E2-64A44C44436E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C70054C-0AE2-4735-80E2-64A44C44436E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2650775-C818-4AC9-B631-8F4A20DACF06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2650775-C818-4AC9-B631-8F4A20DACF06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2650775-C818-4AC9-B631-8F4A20DACF06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2650775-C818-4AC9-B631-8F4A20DACF06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
