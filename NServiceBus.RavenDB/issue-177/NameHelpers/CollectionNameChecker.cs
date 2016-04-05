@@ -8,11 +8,11 @@ namespace NameHelpers
 {
     public static class CollectionNameChecker
     {
-        public static bool CheckForMatch(string candidate, string[] collections, out string match)
+        public static bool CheckForMatch(string candidate, List<string> collections, out string match)
         {
             if (candidate.EndsWith("Datas"))
             {
-                var candidateWithoutEndingDatasAndAnyOtherData = candidate.Substring(0, candidate.LastIndexOf("Datas")).Replace("Data", string.Empty);
+                var candidateWithoutEndingDatasAndAnyOtherData = candidate.Substring(0, candidate.LastIndexOf("Datas", StringComparison.InvariantCulture)).Replace("Data", string.Empty);
 
                 if (collections.Contains(candidateWithoutEndingDatasAndAnyOtherData))
                 {
@@ -27,6 +27,11 @@ namespace NameHelpers
             var candidateWithoutData = candidate.Replace("Data", string.Empty);
             foreach (var collection in collections)
             {
+                if (collection == candidate)
+                {
+                    continue;
+                }
+
                 var pluralizedCollection = Raven.Client.Util.Inflector.Pluralize(collection);
                 if (candidateWithoutData == pluralizedCollection)
                 {

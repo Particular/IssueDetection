@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NameHelpers;
 
 namespace CollectionChecker25
 {
@@ -30,7 +31,7 @@ namespace CollectionChecker25
 
             var url = args[0];
 
-            Helper.CreatDummyData(url);
+            //Helper.CreatDummyData(url);
 
             try
             {
@@ -51,20 +52,22 @@ namespace CollectionChecker25
 
         private static void CheckDatabase(string database, string url)
         {
-            Console.WriteLine($"Checking database {database} for problems.");
+            Console.WriteLine();
+            Console.WriteLine($"********************Checking database {database} for problems.********************************");
 
-            using (var store = RavenHelper.CreateAndInitializeStore(url, database))
+            using (RavenHelper.CreateAndInitializeStore(url, database))
             {
                 var collectionNamesInIndex = RavenHelper.GetIndexTerms("Raven/DocumentsByEntityName", url, database);
 
                 var timeoutProblem = CheckForDuplicateTimeoutCollections(collectionNamesInIndex);
                 var sagaProblem = CheckForDuplicateSagaCollections(collectionNamesInIndex);
 
-
                 Console.WriteLine(timeoutProblem || sagaProblem
-                    ? $"Problems found in database {database}. Please update to NServiceBus.RavenDB hotfix 3.0.7 as soon as possible to avoid potential message loss."
-                    : $"No problems found in database {database}.");
+                  ? $"Problems found in database {database}. There are duplicated timeout and/or saga collections in this database. This is caused by switching between using a connection string and providing a full document store to NSB endpoint using this database. You need to inspect the collections listed above and decided if you can discard the ones currently not in use."
+                  : $"No problems found in database {database}.");
             }
+            Console.WriteLine($"***************Finished checking database {database} for problems.****************************");
+
         }
 
         private static bool CheckForDuplicateSagaCollections(List<string> collectionNamesInIndex)
@@ -74,21 +77,14 @@ namespace CollectionChecker25
             foreach (var collectionName in collectionNamesInIndex)
             {
                 if (KnownCollectionNames.Contains(collectionName))
-                {
                     continue;
-                }
 
-                if (collectionName.EndsWith("Datas"))
-                {
+                string match;
+                if (!CollectionNameChecker.CheckForMatch(collectionName, collectionNamesInIndex, out match))
                     continue;
-                }
 
-                var defaultConventionName = collectionName + "Datas";
-                if (collectionNamesInIndex.Contains(defaultConventionName))
-                {
-                    found = true;
-                    Console.WriteLine($"Problem! Duplicate saga data collections found: {collectionName}/{defaultConventionName}.");
-                }
+                found = true;
+                Console.WriteLine($"Problem! Duplicate saga data collections found: {collectionName}/{match}.");
             }
             return found;
         }
