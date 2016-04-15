@@ -1,4 +1,4 @@
-## NServiceBus.RavenDB Issue 177 Detector
+## NServiceBus.RavenDB Issues 177, 209 and 206 Detector
 
 An issue with NServiceBus.RavenDB was identified which causes timeouts and/or sagas to be stored with multiple naming conventions in the RavenDB database. The naming convention used is dependent on whether the end user provides a simple connection string or a custom DocumentStore to NServiceBus. Both are fine, but one can not switch between them without risking losing data. 
 
