@@ -26,7 +26,7 @@ namespace IndexPruner
             MainAsync(args).Wait();
         }
 
-        private static async Task MainAsync(string[] args)
+        public static async Task MainAsync(string[] args)
         {
             var sagaTypes = FindAllSagaTypes();
             if (sagaTypes.Length == 0)
@@ -38,7 +38,7 @@ namespace IndexPruner
 
             var connectionString = ConfigurationManager.ConnectionStrings[ConnectionStringName]?.ConnectionString ??
                                    FetchConnectionString(args);
-            if (String.IsNullOrWhiteSpace(connectionString))
+            if (string.IsNullOrWhiteSpace(connectionString))
             {
                 Console.WriteLine(
                     $"Provide a connection string in the standard 'connectionStrings' App.config section with following name: '{ConnectionStringName}'");
